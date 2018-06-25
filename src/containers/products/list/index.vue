@@ -1,7 +1,8 @@
 <template>
   <div class="ProductsList">
-    <span>Products List Container</span>
-    {{ presenter.items }}
+    <div class="ProductsList__Products">
+      <Product v-for="item in presenter.items" :key="item.id" :product="item"/>
+    </div>
   </div>
 </template>
 
@@ -12,8 +13,12 @@ import presenter, { IPresenter } from "./presenter";
 import defaultUseCase, { IProductsListPageUseCase } from "./useCase";
 import errorService from "@/services/ErrorService";
 import { ProductRepository } from "@/repositories/ProductRepository";
+import Product from "@/components/Modules/Product.vue";
 
 export default Vue.extend({
+  components: {
+    Product
+  },
   data() {
     return {
       page: 0,
@@ -46,3 +51,10 @@ export default Vue.extend({
   }
 });
 </script>
+
+<style>
+.ProductsList__Products {
+  display: flex;
+  width: 40%;
+}
+</style>
