@@ -1,4 +1,5 @@
 export interface IProduct {
+  id: number;
   thumbnail: string;
   name: string;
   designer: string;
