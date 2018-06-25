@@ -11,6 +11,9 @@ import Vue from "vue";
 import { IProductsCriteria } from "@/entities/Product";
 import presenter, { IPresenter } from "./presenter";
 import defaultUseCase, { IProductsListPageUseCase } from "./useCase";
+import destroyUseCase, {
+  IProductsListPageDestroyUseCase
+} from "./destroyUseCase";
 import errorService from "@/services/ErrorService";
 import { ProductRepository } from "@/repositories/ProductRepository";
 import Product from "@/components/Modules/Product.vue";
@@ -48,6 +51,13 @@ export default Vue.extend({
     };
 
     await new defaultUseCase(params).execute();
+  },
+  async destroyed() {
+    const params: IProductsListPageDestroyUseCase = {
+      productRepository: new ProductRepository()
+    };
+
+    await new destroyUseCase(params).execute();
   }
 });
 </script>
