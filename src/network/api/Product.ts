@@ -12,4 +12,15 @@ export namespace ProductAPI {
     parse = (data: AxiosResponse) => data.data
     constructor(public params: PaginationRequest<IProductsCriteria>) {}
   }
+
+  // fetch product
+  export class GetProduct implements APIRequest<IProduct> {
+    response: IProduct;
+    path: string;
+    method = HTTPMethod.GET;
+    parse = (data: AxiosResponse) => data.data
+    constructor(id: number) {
+      this.path = `/api/products/${id}`;
+    }
+  }
 }
