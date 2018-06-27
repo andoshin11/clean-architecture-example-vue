@@ -1,8 +1,12 @@
 import { MutationTree } from 'vuex'
 import { ProductState, initialState } from './state'
-import { Types, StoreItems, ClearItems } from './types'
+import { Types, StoreItems, StoreItem, ClearItems } from './types'
 
 export const mutations: MutationTree<ProductState> = {
+  [Types.STORE_ITEM]: (state, action: StoreItem) => {
+    const item = action.payload
+    state.item = item
+  },
   [Types.STORE_ITEMS]: (state, action: StoreItems) => {
     const { page, size, items } = action.payload
     state.page = page
