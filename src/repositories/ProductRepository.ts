@@ -2,7 +2,7 @@ import BaseRepository from '@/repositories/BaseRepository'
 import store from '@/store'
 import { APIClient } from '@/network/APIClient'
 import { ProductAPI } from '@/network/api/Product'
-import { StoreItems, StoreItem, ClearItems } from '@/store/modules/product/types'
+import { StoreItems, StoreItem, ClearItems, ClearItem } from '@/store/modules/product/types'
 import { IProduct, IProductsCriteria } from '@/entities/Product'
 
 export class ProductRepository implements BaseRepository {
@@ -15,6 +15,10 @@ export class ProductRepository implements BaseRepository {
 
   saveItem(item: IProduct) {
     store.commit(new StoreItem(item))
+  }
+
+  clearItem() {
+    store.commit(new ClearItem())
   }
 
   async fetchItems(params: PaginationRequest<IProductsCriteria>) {
