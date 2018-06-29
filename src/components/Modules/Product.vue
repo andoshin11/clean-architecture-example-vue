@@ -3,10 +3,7 @@
     <img class="Product__Image" :src="product.thumbnail"/>
     <div class="Product__Designer">{{ product.designer }}</div>
     <div class="Product__Name">{{ product.name }}</div>
-    <div class="Produt__Prices">
-      <div class="Product__PricesHire">£{{ product.hirePrice }}</div>
-      <div class="Product__PricesRetail">£{{ product.retailPrice }}</div>
-    </div>
+    <div class="Produt__Price">£{{ product.price }}</div>
   </a>
 </template>
 
@@ -61,18 +58,7 @@ export default Vue.extend({
   margin-bottom: 8px;
 }
 
-.Produt__Prices {
-  display: flex;
-  justify-content: space-around;
-  width: 40%;
-  margin-bottom: 16px;
-}
-
-.Product__PricesHire {
+.Produt__Price {
   font-weight: bold;
-}
-
-.Product__PricesRetail {
-  text-decoration: line-through;
 }
 </style>

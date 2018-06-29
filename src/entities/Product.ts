@@ -3,8 +3,7 @@ export interface IProduct {
   thumbnail: string;
   name: string;
   designer: string;
-  hirePrice: number;
-  retailPrice: number;
+  price: number;
 }
 
 export interface IProductsCriteria {

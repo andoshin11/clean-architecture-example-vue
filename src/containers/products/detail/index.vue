@@ -8,10 +8,7 @@
         <div class="ProductsDetail__Info">
           <div class="ProductsDetail__Designer">{{ presenter.item.designer }}</div>
           <div class="ProductsDetail__Nam">{{ presenter.item.name }}</div>
-          <div class="ProductsDetail__Prices">
-            <div class="ProductsDetail__PricesHire">£{{ presenter.item.hirePrice }}</div>
-            <div class="ProductsDetail__PricesRetail">£{{ presenter.item.retailPrice }}</div>
-          </div>
+          <div class="ProductsDetail__Price">£{{ presenter.item.price }}</div>
         </div>
         <div v-if="!presenter.isInCart" class="ProductsDetail__Button">
           <Button text="カートに追加" autoWidth @click="addItemToCart"/>
@@ -133,16 +130,9 @@ export default Vue.extend({
   margin-bottom: 8px;
 }
 
-.ProductsDetail__Prices {
-  display: flex;
-  align-items: flex-end;
-  width: 100%;
-}
-
-.ProductsDetail__PricesHire {
+.ProductsDetail__Price {
   font-weight: bold;
   font-size: 20px;
-  margin-right: 16px;
 }
 
 .ProductsDetail__Button {

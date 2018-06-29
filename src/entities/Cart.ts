@@ -15,7 +15,7 @@ export class CartEntity {
 
   addItemToCart(item: IProduct) {
     // do some price calculation.
-    const checkoutPrice = item.retailPrice * 1.08
+    const checkoutPrice = item.price * 1.08
     const cartItem = {
       ...item,
       checkoutPrice
