@@ -1,7 +1,5 @@
 <template>
-  <div class="container">
-    <ProductsDetailContainer :id="$route.params.id"/>
-  </div>
+  <ProductsDetailContainer :id="$route.params.id"/>
 </template>
 
 <script lang="ts">

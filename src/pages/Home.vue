@@ -1,7 +1,5 @@
 <template>
-  <div class="container">
-    <ProductsListContainer/>
-  </div>
+  <ProductsListContainer/>
 </template>
 
 <script lang="ts">
