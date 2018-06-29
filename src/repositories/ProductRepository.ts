@@ -5,7 +5,7 @@ import { ProductAPI } from '@/network/api/Product'
 import { StoreItems, StoreItem, ClearItems, ClearItem } from '@/store/modules/product/types'
 import { IProduct, IProductsCriteria } from '@/entities/Product'
 
-export class ProductRepository implements BaseRepository {
+export default class ProductRepository implements BaseRepository {
 
   constructor() {}
 
@@ -19,6 +19,11 @@ export class ProductRepository implements BaseRepository {
 
   clearItem() {
     store.commit(new ClearItem())
+  }
+
+  // TODO: Manage item with ID
+  getItem(): IProduct {
+    return store.state.product.item
   }
 
   async fetchItems(params: PaginationRequest<IProductsCriteria>) {
