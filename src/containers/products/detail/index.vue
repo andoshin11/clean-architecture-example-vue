@@ -13,8 +13,11 @@
             <div class="ProductsDetail__PricesRetail">£{{ presenter.item.retailPrice }}</div>
           </div>
         </div>
-        <div class="ProductsDetail__Button">
-          <Button text="カートに追加" autoWidth/>
+        <div v-if="!presenter.isInCart" class="ProductsDetail__Button">
+          <Button text="カートに追加" autoWidth @click="addItemToCart"/>
+        </div>
+        <div v-else class="ProductsDetail__Button">
+          <Button text="追加済み" autoWidth disabled/>
         </div>
       </div>
     </template>
@@ -23,16 +26,23 @@
 
 <script lang="ts">
 import Vue from "vue";
+import { CartEntity } from "@/entities/Cart";
 import { IProductsCriteria } from "@/entities/Product";
-import presenter, { IPresenter } from "./presenter";
-import defaultUseCase, { IProductsDetailPageUseCase } from "./useCase";
-import destroyUseCase, {
-  IProductsDetailPageDestroyUseCase
-} from "./destroyUseCase";
-import errorService from "@/services/ErrorService";
-import { ProductRepository } from "@/repositories/ProductRepository";
+import presenter, { IPresenter, IPresenterState } from "./presenter";
+import LoadContainerUseCase, {
+  ILoadContainerUseCase
+} from "./LoadContainerUseCase";
+import DestroyContainerUseCase, {
+  IDestroyContainerUseCase
+} from "./DestroyContainerUseCase";
+import ErrorService from "@/services/ErrorService";
+import CartRepository from "@/repositories/CartRepository";
+import ProductRepository from "@/repositories/ProductRepository";
 import Button from "@/components/Base/Button.vue";
 import Product from "@/components/Modules/Product.vue";
+import AddItemToCartUseCase, {
+  IAddItemToCartUseCase
+} from "@/usecases/AddItemToCartUseCase";
 
 export default Vue.extend({
   components: {
@@ -46,27 +56,43 @@ export default Vue.extend({
     }
   },
   computed: {
-    presenter(): IPresenter {
-      return presenter(this.$store.state);
+    presenter(): IPresenterState {
+      const params: IPresenter = {
+        productRepository: new ProductRepository(),
+        cartRepository: new CartRepository()
+      };
+      return presenter(params);
+    }
+  },
+  methods: {
+    async addItemToCart() {
+      const usecase = new AddItemToCartUseCase({
+        cart: new CartEntity(),
+        errorService: new ErrorService({
+          context: "Adding the item to cart"
+        })
+      });
+
+      await usecase.execute(this.presenter.item);
     }
   },
   async mounted() {
-    const params: IProductsDetailPageUseCase = {
+    const params: ILoadContainerUseCase = {
       productRepository: new ProductRepository(),
       id: parseInt(this.id, 10),
-      errorService: new errorService({
+      errorService: new ErrorService({
         context: "mounting products detail page"
       })
     };
 
-    await new defaultUseCase(params).execute();
+    await new LoadContainerUseCase(params).execute();
   },
   async destroyed() {
-    const params: IProductsDetailPageDestroyUseCase = {
+    const params: IDestroyContainerUseCase = {
       productRepository: new ProductRepository()
     };
 
-    await new destroyUseCase(params).execute();
+    await new DestroyContainerUseCase(params).execute();
   }
 });
 </script>

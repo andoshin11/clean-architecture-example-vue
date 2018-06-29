@@ -1,13 +1,29 @@
-import { RootState } from '@/store'
 import { IProduct } from '@/entities/Product'
+import CartRepository from '@/repositories/CartRepository'
+import ProductRepository from '@/repositories/ProductRepository'
 
 export interface IPresenter {
-  item: IProduct
+  productRepository: ProductRepository
+  cartRepository: CartRepository
 }
 
-// Maybe: use generics?
-export default (state: RootState): IPresenter => {
+export interface IPresenterState {
+  item: IProduct
+  isInCart: boolean
+}
+
+const isInCart = (productRepository: ProductRepository, cartRepository: CartRepository) => {
+  const item = productRepository.getItem()
+  const cartItems = cartRepository.getItems()
+
+  const targetItem = cartItems.find(cartItem => cartItem.id === item.id)
+
+  return targetItem ? true : false
+}
+
+export default ({ productRepository, cartRepository }: IPresenter): IPresenterState => {
   return {
-    item: state.product.item
+    item: productRepository.getItem(), // TODO: Manage with ID
+    isInCart: isInCart(productRepository, cartRepository)
   }
 }

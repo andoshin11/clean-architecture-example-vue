@@ -1,7 +1,7 @@
 import BaseUseCase from '@/usecases/BaseUseCase'
 import BaseService from '@/services/BaseService'
 import BaseRepository from '@/repositories/BaseRepository'
-import { IProduct, IProductsCriteria } from '@/entities/Product'
+import { IProductsCriteria } from '@/entities/Product'
 
 export interface IProductsListPageUseCase {
   productRepository: BaseRepository;
@@ -25,7 +25,7 @@ export default class ProductsListPageUseCase implements BaseUseCase {
       const data = await this.productRepository.fetchItems(this.request)
       this.productRepository.saveItems(data)
     } catch(e) {
-      this.errorService.handle(e)
+      await this.errorService.handle(e)
     }
     return
   }
