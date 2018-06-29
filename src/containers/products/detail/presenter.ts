@@ -16,6 +16,8 @@ const isInCart = (productRepository: ProductRepository, cartRepository: CartRepo
   const item = productRepository.getItem()
   const cartItems = cartRepository.getItems()
 
+  if (!item || cartItems.length < 1) return false
+
   const targetItem = cartItems.find(cartItem => cartItem.id === item.id)
 
   return targetItem ? true : false

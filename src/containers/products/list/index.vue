@@ -15,7 +15,7 @@ import destroyUseCase, {
   IProductsListPageDestroyUseCase
 } from "./destroyUseCase";
 import errorService from "@/services/ErrorService";
-import { ProductRepository } from "@/repositories/ProductRepository";
+import ProductRepository from "@/repositories/ProductRepository";
 import Product from "@/components/Modules/Product.vue";
 
 export default Vue.extend({
