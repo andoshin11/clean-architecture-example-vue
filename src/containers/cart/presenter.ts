@@ -7,13 +7,15 @@ export interface IPresenter {
 
 export interface IPresenterState {
   items: ICartItem[],
-  isEmpty: boolean
+  isEmpty: boolean,
+  isCheckingOut: boolean
 }
 
 export default ({ cartRepository }: IPresenter): IPresenterState => {
   const items = cartRepository.getItems()
   return {
     items,
-    isEmpty: !items || items.length == 0
+    isEmpty: !items || items.length == 0,
+    isCheckingOut: cartRepository.isCheckingOut()
   }
 }

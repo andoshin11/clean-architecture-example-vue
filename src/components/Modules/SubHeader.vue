@@ -2,7 +2,7 @@
   <div class="SubHeader">
     <div class="SubHeader__Total">Total Price: £{{ totalPrice }}</div>
     <router-link class="SubHeader__Cart" to="/cart">
-      Your Cart<span v-if="cartItems && cartItems.length > 0" class="SubHeader__Badge">{{ cartItems.length }}</span>
+      My Cart<span v-if="cartItems && cartItems.length > 0" class="SubHeader__Badge">{{ cartItems.length }}</span>
     </router-link>
   </div>
 </template>

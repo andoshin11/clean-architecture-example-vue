@@ -1,6 +1,6 @@
 import { MutationTree } from 'vuex'
-import { CartState } from './state'
-import { Types, AddItem } from './types'
+import { CartState, initialState } from './state'
+import { Types, AddItem, SetCheckingOut } from './types'
 
 export const mutations: MutationTree<CartState> = {
   [Types.ADD_ITEM]: (state, action: AddItem) => {
@@ -11,5 +11,13 @@ export const mutations: MutationTree<CartState> = {
         item
       ]
     }
+  },
+  [Types.SET_CHECKING_OUT]: (state, action: SetCheckingOut) => {
+    state.isCheckingOut = action.payload
+  },
+  [Types.CLEAR_ITEMS]: (state) => {
+    const initial = initialState().cart.items
+
+    state.cart.items = [...initial]
   }
 }

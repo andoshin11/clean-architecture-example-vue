@@ -9,4 +9,8 @@ export default class CartRepository implements BaseRepository {
   getItems(): ICartItem[] {
     return store.state.cart.cart.items
   }
+
+  isCheckingOut(): boolean {
+    return store.state.cart.isCheckingOut
+  }
 }

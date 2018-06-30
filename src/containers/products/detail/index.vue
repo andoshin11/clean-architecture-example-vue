@@ -11,10 +11,10 @@
           <div class="ProductsDetail__Price">£{{ presenter.item.price }}</div>
         </div>
         <div v-if="!presenter.isInCart" class="ProductsDetail__Button">
-          <Button text="カートに追加" autoWidth @click="addItemToCart"/>
+          <Button text="Add to Cart" autoWidth @click="addItemToCart"/>
         </div>
         <div v-else class="ProductsDetail__Button">
-          <Button text="追加済み" autoWidth disabled/>
+          <Button text="Already in Cart" autoWidth disabled/>
         </div>
       </div>
     </template>
