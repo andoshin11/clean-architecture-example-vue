@@ -1,9 +1,9 @@
 <template>
   <div class="SubHeader">
     <div class="SubHeader__Total">Total Price: £{{ totalPrice }}</div>
-    <div class="SubHeader__Cart">
+    <router-link class="SubHeader__Cart" to="/cart">
       Your Cart<span v-if="cartItems && cartItems.length > 0" class="SubHeader__Badge">{{ cartItems.length }}</span>
-    </div>
+    </router-link>
   </div>
 </template>
 
