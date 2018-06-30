@@ -75,6 +75,6 @@ export default Vue.extend({
 <style>
 .ProductsList__Products {
   display: flex;
-  width: 40%;
+  width: 80%;
 }
 </style>

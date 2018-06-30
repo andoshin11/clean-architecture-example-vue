@@ -14,5 +14,21 @@ module.exports = [
     name: "Off-the-shoulder Strapless Stretch Crepe Gown",
     designer: "THEIA COUTURE",
     price: 695
+  },
+  {
+    id: 3,
+    thumbnail:
+      "https://cbc.imgix.net/dresses/image_fronts/000/000/919/original/919-blue-tulip-skirt-dress.jpeg?ixlib=rb-1.1.0&auto=format&fm=pjpg&cs=strip&ts=1491388072&w=1452&h=2484&s=ba38671b52f16965d655cc940db6d527",
+    name: "Blue Tulip Skirt Dress",
+    designer: "HALSTON HERITAGE",
+    price: 445
+  },
+  {
+    id: 4,
+    thumbnail:
+      "https://cbc.imgix.net/dresses/image_fronts/000/000/948/original/948-colour-block-off-shoulder-cocktail-dress.jpeg?ixlib=rb-1.1.0&auto=format&fm=pjpg&cs=strip&ts=1488985680&w=1452&h=2484&s=b7ff4e9f62a861bbcc188b777aa941dc",
+    name: "Colour Block off shoulder Cocktail Dress",
+    designer: "ML MONIQUE LHUILLIER",
+    price: 550
   }
 ];
