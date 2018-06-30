@@ -1,20 +1,20 @@
 import BaseUseCase from '@/usecases/BaseUseCase'
-import BaseService from '@/services/BaseService'
-import BaseRepository from '@/repositories/BaseRepository'
+import ErrorService from '@/services/ErrorService'
+import ProductRepository from '@/repositories/ProductRepository'
 import { IProductsCriteria } from '@/entities/Product'
 
-export interface IProductsListPageUseCase {
-  productRepository: BaseRepository;
+export interface ILoadContainerUseCase {
+  productRepository: ProductRepository;
   request: PaginationRequest<IProductsCriteria>
-  errorService: BaseService
+  errorService: ErrorService
 }
 
-export default class ProductsListPageUseCase implements BaseUseCase {
-  productRepository: BaseRepository;
+export default class LoadContainerUseCase implements BaseUseCase {
+  productRepository: ProductRepository;
   request: PaginationRequest<IProductsCriteria>
-  errorService: BaseService
+  errorService: ErrorService
 
-  constructor({ productRepository, request, errorService }: IProductsListPageUseCase) {
+  constructor({ productRepository, request, errorService }: ILoadContainerUseCase) {
     this.productRepository = productRepository
     this.request = request
     this.errorService = errorService

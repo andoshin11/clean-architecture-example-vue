@@ -1,13 +1,16 @@
-import { RootState } from '@/store'
 import { IProduct } from '@/entities/Product'
+import ProductRepository from '@/repositories/ProductRepository'
 
 export interface IPresenter {
+  productRepository: ProductRepository
+}
+
+export interface IPresenterState {
   items: IProduct[]
 }
 
-// Maybe: use generics?
-export default (state: RootState): IPresenter => {
+export default ({ productRepository }: IPresenter): IPresenterState => {
   return {
-    items: state.product.items
+    items: productRepository.getItems()
   }
 }

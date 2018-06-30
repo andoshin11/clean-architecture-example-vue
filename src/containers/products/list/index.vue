@@ -8,14 +8,21 @@
 
 <script lang="ts">
 import Vue from "vue";
+
+// Interface Adapter
+import Presenter, { IPresenter, IPresenterState } from "./presenter";
+import LoadContainerUseCase, {
+  ILoadContainerUseCase
+} from "./LoadContainerUseCase";
+import DestroyContainerUseCase, {
+  IDestroyContainerUseCase
+} from "./DestroyContainerUseCase";
+
 import { IProductsCriteria } from "@/entities/Product";
-import presenter, { IPresenter } from "./presenter";
-import defaultUseCase, { IProductsListPageUseCase } from "./useCase";
-import destroyUseCase, {
-  IProductsListPageDestroyUseCase
-} from "./destroyUseCase";
 import errorService from "@/services/ErrorService";
 import ProductRepository from "@/repositories/ProductRepository";
+
+// Components
 import Product from "@/components/Modules/Product.vue";
 
 export default Vue.extend({
@@ -39,25 +46,28 @@ export default Vue.extend({
         criteria: this.criteria
       };
     },
-    presenter(): IPresenter {
-      return presenter(this.$store.state);
+    presenter(): IPresenterState {
+      const params: IPresenter = {
+        productRepository: new ProductRepository()
+      };
+      return Presenter(params);
     }
   },
   async mounted() {
-    const params: IProductsListPageUseCase = {
+    const params: ILoadContainerUseCase = {
       productRepository: new ProductRepository(),
       request: this.productsParams,
       errorService: new errorService({ context: "mounting products list page" })
     };
 
-    await new defaultUseCase(params).execute();
+    await new LoadContainerUseCase(params).execute();
   },
   async destroyed() {
-    const params: IProductsListPageDestroyUseCase = {
+    const params: IDestroyContainerUseCase = {
       productRepository: new ProductRepository()
     };
 
-    await new destroyUseCase(params).execute();
+    await new DestroyContainerUseCase(params).execute();
   }
 });
 </script>

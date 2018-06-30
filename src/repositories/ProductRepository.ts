@@ -39,4 +39,8 @@ export default class ProductRepository implements BaseRepository {
   clearItems(){
     store.commit(new ClearItems())
   }
+
+  getItems(): IProduct[] {
+    return store.state.product.items
+  }
 }
